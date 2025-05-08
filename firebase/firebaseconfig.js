@@ -1,20 +1,24 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore"; // ✅ Add this import
 
-// You don't need analytics right now unless you are tracking app usage.
-// So you can skip importing `getAnalytics`
-
-// Your firebase config
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBIuof8Oon8SuopUEM2bGOgRR3-FbeYhC4",
   authDomain: "tapandlearn-8e5c0.firebaseapp.com",
+  databaseURL: "https://tapandlearn-8e5c0-default-rtdb.firebaseio.com",
   projectId: "tapandlearn-8e5c0",
-  storageBucket: "tapandlearn-8e5c0.firebasestorage.app",
+  storageBucket: "tapandlearn-8e5c0.appspot.com",
   messagingSenderId: "611734747114",
   appId: "1:611734747114:web:7fcf39c62b4f31ff3aa493",
   measurementId: "G-K3NT7MGKJ7"
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig); // <-- Export app also
-export const auth = getAuth(app); // <-- Export auth
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+const db = getFirestore(app); // ✅ This is what you pass to Firestore functions
+
+export { app, auth, database, db }; // ✅ Export db here (not default)
